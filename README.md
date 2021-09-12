@@ -1,2 +1,1 @@
-# fast-mihiraki-PDFViewer
-高速見開きPDFビューア　120ページ/秒でページめくりできます
+http://kwhr0.g2.xrea.com/wview.html
