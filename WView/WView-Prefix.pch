@@ -1,0 +1,25 @@
+// MuPDFライブラリを使用する場合は以下を定義する
+// 使用しない場合はコメントアウトするとともに、Other Linker Flagsの-lmupdf-third -lmupdfを削除する
+#define MUPDF
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#endif
+
+#ifdef __cplusplus
+#include <deque>
+#include <vector>
+#endif
+
+#include <sys/stat.h>
+
+#ifdef MUPDF
+#include <mupdf/fitz.h>
+#include <pthread.h>
+#include <sys/sysctl.h>
+// PDFのページ数がPREFETCH_ALL_THRESHOLD以下の場合、全ページをプリフェッチし、高速ページめくりが可能になる
+// そうでない場合、進んでいる方向の数ページ(CPUコア数による)をプリフェッチする
+#define PREFETCH_ALL_THRESHOLD	400
+#define KEYREP1	.3	// カーソルキー/マウスボタンを押してからリピートが始まるまでの時間[秒]
+#define KEYREP2	0.	// リピート間隔[秒]
+#endif
