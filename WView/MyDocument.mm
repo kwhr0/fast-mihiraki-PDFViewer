@@ -89,7 +89,7 @@ static void unlock_mutex(void *user, int lock) {
 	for (int i = 0; i < docs.count; i++) {
 		NSArray *a = [docs[i] windowControllers];
 		if (a.count) [[a[0] window] close];
-    }
+	}
 	self.url = absoluteURL;
 #ifdef MUPDF
 	for (int i = 0; i < FZ_LOCK_MAX; i++)
@@ -141,7 +141,7 @@ static void unlock_mutex(void *user, int lock) {
 	fz_drop_document(_ctx, _pdf);
 	fz_drop_context(_ctx);
 #endif
-    [super close];
+	[super close];
 }
 
 - (NSSize)pageSize:(int)page {
@@ -177,7 +177,7 @@ static void unlock_mutex(void *user, int lock) {
 }
 
 - (IBAction)switchCover:(id)sender {
-    _cover = !_cover;
+	_cover = !_cover;
 	if (!_cover) _page++;
 	[self setPage:_page];
 	[_view refresh];

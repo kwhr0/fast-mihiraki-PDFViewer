@@ -119,8 +119,8 @@ private:
 	CGColorSpaceRef _colorSpace;
 	uint32_t *_bitmapMain, *_bitmapThumb;
 	int _width, _height;
-    int _xn, _yn;
-    BOOL _multi, _thumbFlag, _busy;
+	int _xn, _yn;
+	BOOL _multi, _thumbFlag, _busy;
 	int _mousePage;
 }
 - (void)update:(double)interval;
@@ -353,7 +353,7 @@ static CVReturn DisplayLinkCallback(CVDisplayLinkRef, const CVTimeStamp *now, co
 - (void)drawSub:(int)page mode:(Mode)mode {
 	NSRect rect = [self getRect:page];
 	size_t pageCount = _doc.pageCount;
-    BOOL wf = _doc.cover ? page > 0 && (page < pageCount - 1 || pageCount & 1) : page < pageCount - 1;
+	BOOL wf = _doc.cover ? page > 0 && (page < pageCount - 1 || pageCount & 1) : page < pageCount - 1;
 	BOOL direction = _doc.direction;
 	NSSize docSize, docSize0, docSize1;
 	if (wf) {
@@ -365,56 +365,56 @@ static CVReturn DisplayLinkCallback(CVDisplayLinkRef, const CVTimeStamp *now, co
 	else docSize = [_doc pageSize:page];
 	double docAspect = docSize.height / docSize.width;
 	NSSize viewSize = rect.size;
-    double viewAspect = viewSize.height / viewSize.width;
-    if (wf) viewAspect *= 2.;
-    if (viewAspect < docAspect) {
-        double width = viewSize.height / docAspect;
-        if (wf) {
+	double viewAspect = viewSize.height / viewSize.width;
+	if (wf) viewAspect *= 2.;
+	if (viewAspect < docAspect) {
+		double width = viewSize.height / docAspect;
+		if (wf) {
 			double x2 = .5 * rect.size.width;
 			double x = rect.origin.x;
 			double xratio = docSize0.width / docSize.width;
 			rect.origin.x += direction ? x2 - width : x2 + (1. - xratio) * width;
-            rect.size.width = xratio * width;
+			rect.size.width = xratio * width;
 			[self drawSub:page inRect:rect mode:mode];
 			xratio = docSize1.width / docSize.width;
-            rect.origin.x = x + (direction ? x2 + (1. - xratio) * width : x2 - width);
+			rect.origin.x = x + (direction ? x2 + (1. - xratio) * width : x2 - width);
 			rect.size.width = xratio * width;
 			[self drawSub:page + 1 inRect:rect mode:mode];
-        }
-        else {
-            rect.origin.x += .5 * (rect.size.width - width);
-            rect.size.width = width;
+		}
+		else {
+			rect.origin.x += .5 * (rect.size.width - width);
+			rect.size.width = width;
 			[self drawSub:page inRect:rect mode:mode];
-        }
-    }
-    else {
+		}
+	}
+	else {
 		double width = .5 * rect.size.width;
-        if (wf) {
-            double height = .5 * viewSize.width * docAspect;
-            rect.origin.y += .5 * (rect.size.height - height);
+		if (wf) {
+			double height = .5 * viewSize.width * docAspect;
+			rect.origin.y += .5 * (rect.size.height - height);
 			rect.size.height = height;
 			double x = rect.origin.x;
 			double xratio = docSize0.width / docSize.width;
 			rect.size.width = xratio * width;
-            rect.origin.x += direction ? 0. : (2. - xratio) * width;
+			rect.origin.x += direction ? 0. : (2. - xratio) * width;
 			[self drawSub:page inRect:rect mode:mode];
 			xratio = docSize1.width / docSize.width;
 			rect.size.width = xratio * width;
-            rect.origin.x = x + (direction ? (2. - xratio) * width : 0.);
+			rect.origin.x = x + (direction ? (2. - xratio) * width : 0.);
 			[self drawSub:page + 1 inRect:rect mode:mode];
-        }
-        else {
-            double height = viewSize.width * docAspect;
-            rect.origin.y += .5 * (rect.size.height - height);
-            rect.size.height = height;
+		}
+		else {
+			double height = viewSize.width * docAspect;
+			rect.origin.y += .5 * (rect.size.height - height);
+			rect.size.height = height;
 			[self drawSub:page inRect:rect mode:mode];
-        }
-    }
+		}
+	}
 }
 
 - (void)drawRect:(NSRect)rect {
 	int bytes = 4 * _width * _height;
-    if (!_multi) {
+	if (!_multi) {
 		memset(_bitmapMain, 0xff, bytes);
 		[self drawSub:_doc.page mode:MODE_MAIN];
 	}
@@ -443,7 +443,7 @@ static CVReturn DisplayLinkCallback(CVDisplayLinkRef, const CVTimeStamp *now, co
 	if (_multi) {
 		[[NSColor.selectedControlColor colorWithAlphaComponent:.5] set];
 		NSRectFillUsingOperation([self getRect:_doc.page], NSCompositeSourceOver);
-    }
+	}
 	_busy = FALSE;
 	//static TM tm;tm.stop();tm.start();
 }
