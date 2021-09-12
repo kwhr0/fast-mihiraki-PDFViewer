@@ -1,7 +1,7 @@
 #import "MyDocument.h"
 #import "MyView.h"
 
-#define SETTINGS        @"settings"
+#define SETTINGS		@"settings"
 #define FILEURL			@"url"
 #define NO_COVER		@"noCover"
 #define DIRECTION		@"direction"
