@@ -194,6 +194,9 @@ static CVReturn DisplayLinkCallback(CVDisplayLinkRef, const CVTimeStamp *now, co
 	size_t len = sizeof(ncore);
 	int selection[] = { CTL_HW, HW_NCPU };
 	if (sysctl(selection, 2, &ncore, &len, nullptr, 0)) ncore = 1;
+	printf("CPU %d cores, ", ncore);
+	if (ncore > 2) ncore = std::max(ncore / 2, ncore - 4);
+	printf("using %d cores\n", ncore);
 	_renderN = ncore;
 	_dg = dispatch_group_create();
 	for (int i = 0; i < ncore; i++) {
